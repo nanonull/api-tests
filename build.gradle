@@ -1,0 +1,29 @@
+wrapper {
+    gradleVersion = '6.0.1'
+}
+
+allprojects {
+    println "Configure project: $name"
+
+    apply plugin: "java"
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        apacheVersion = '4.5.11'
+        javaVersion = 11
+    }
+
+    if (plugins.hasPlugin('java')) {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+
+        dependencies {
+            implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.0'
+            implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheVersion
+            implementation group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheVersion
+        }
+    }
+}
