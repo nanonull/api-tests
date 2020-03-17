@@ -1,6 +1,7 @@
-rootProject.name = "api-tests-root"
+rootProject.name = "tests-root"
 include 'api-client'
 include 'api-tests-spock'
 include 'api-tests-testng'
 include 'ui-tests-geb'
+include 'load-tests-gatling'
 

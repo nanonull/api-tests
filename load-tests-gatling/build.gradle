@@ -1,0 +1,20 @@
+apply plugin: "scala"
+
+ext {
+    scalaVersion = "2.12.10"
+    gatlingVersion = "3.2.1"
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library:${scalaVersion}"
+    compile "org.scala-lang:scala-compiler:${scalaVersion}"
+
+    testCompile "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
+    compile group: 'io.gatling', name: 'gatling-core', version: gatlingVersion
+    compile group: 'io.gatling', name: 'gatling-http', version: gatlingVersion
+    compile group: 'io.gatling', name: 'gatling-jdbc', version: gatlingVersion
+    compile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
+    compile group: 'io.gatling', name: 'gatling-recorder', version: gatlingVersion
+
+    implementation project(':api-client')
+}
