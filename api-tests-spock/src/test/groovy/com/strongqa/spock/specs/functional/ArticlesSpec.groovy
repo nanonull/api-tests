@@ -1,7 +1,7 @@
 package com.strongqa.spock.specs.functional
 
 import com.strongqa.api.client.ApiLibrary
-import com.strongqa.api.client.Utils
+
 import com.strongqa.api.client.models.article.Article
 import com.strongqa.api.client.models.article.ArticleCreateRequest
 import com.strongqa.spock.BaseSpecification

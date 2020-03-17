@@ -1,4 +1,7 @@
 dependencies {
     implementation project(':api-client')
     implementation libs.rest_assured
+
+    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+
 }

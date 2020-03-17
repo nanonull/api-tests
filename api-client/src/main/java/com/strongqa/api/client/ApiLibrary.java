@@ -1,5 +1,7 @@
 package com.strongqa.api.client;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.strongqa.api.client.models.article.Article;
 import com.strongqa.api.client.models.article.ArticleCreateRequest;
@@ -15,43 +17,46 @@ import org.apache.http.util.EntityUtils;
 
 public class ApiLibrary {
 
-  public static final String baseUrl = System.getenv("BASE_URL");
-  public static final String apiToken = System.getenv("API_TOKEN");
-  public static final Header apiAuthHeader = new BasicHeader("Authorization",
-      "Token token=" + apiToken);
+  public static final String BASE_URL = System.getenv("BASE_URL");
+  public static final String API_TOKEN = System.getenv("API_TOKEN");
+  public static final Header API_AUTH_HEADER = new BasicHeader("Authorization",
+      "Token token=" + API_TOKEN);
+  public static final Gson GSON = new GsonBuilder()
+      .setPrettyPrinting()
+      .create();
 
   public Request buildGetArticles() {
-    return Request.Get(baseUrl + "/api/v1/articles")
+    return Request.Get(BASE_URL + "/api/v1/articles")
         .addHeader("Content-Type", "application/json")
-        .addHeader(apiAuthHeader);
+        .addHeader(API_AUTH_HEADER);
   }
 
   public List<Article> getArticles() throws IOException {
     HttpResponse response = buildGetArticles().execute().returnResponse();
-    return Utils.GSON.fromJson(EntityUtils.toString(response.getEntity()),
+    return GSON.fromJson(EntityUtils.toString(response.getEntity()),
         new TypeToken<List<Article>>() {
         }.getType());
   }
 
   public Request buildPostArticle(ArticleCreateRequest request) throws IOException {
-    return Request.Post(baseUrl + "/api/v1/articles")
+    return Request.Post(BASE_URL + "/api/v1/articles")
         .addHeader("Content-Type", "application/json")
-        .addHeader(apiAuthHeader)
-        .body(new StringEntity(Utils.GSON.toJson(request)));
+        .addHeader(API_AUTH_HEADER)
+        .body(new StringEntity(GSON.toJson(request)));
   }
 
   public Article postArticle(ArticleCreateRequest request) throws IOException {
     HttpResponse response = buildPostArticle(request).execute().returnResponse();
-    return Utils.GSON.fromJson(EntityUtils.toString(response.getEntity()), Article.class);
+    return GSON.fromJson(EntityUtils.toString(response.getEntity()), Article.class);
   }
 
   public List<Category> getCategories() throws IOException {
-    HttpResponse response = Request.Get(baseUrl + "/api/v1/categories")
+    HttpResponse response = Request.Get(BASE_URL + "/api/v1/categories")
         .addHeader("Content-Type", "application/json")
-        .addHeader(apiAuthHeader)
+        .addHeader(API_AUTH_HEADER)
         .execute().returnResponse();
 
-    return Utils.GSON.fromJson(EntityUtils.toString(response.getEntity()),
+    return GSON.fromJson(EntityUtils.toString(response.getEntity()),
         new TypeToken<List<Category>>() {
         }.getType());
   }
