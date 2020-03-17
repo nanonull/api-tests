@@ -1,0 +1,13 @@
+apply plugin: "groovy"
+
+ext {
+    gebVersion = 3.3
+}
+dependencies {
+    implementation group: 'org.gebish', name: 'geb-core', version: gebVersion
+    implementation group: 'org.gebish', name: 'geb-spock', version: gebVersion
+    implementation group: 'org.gebish', name: 'geb-waiting', version: gebVersion
+    implementation group: 'org.gebish', name: 'geb-implicit-assertions', version: gebVersion
+
+    implementation project(':api-client')
+}

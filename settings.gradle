@@ -2,4 +2,5 @@ rootProject.name = "api-tests-root"
 include 'api-client'
 include 'api-tests-spock'
 include 'api-tests-testng'
+include 'ui-tests-geb'
 
