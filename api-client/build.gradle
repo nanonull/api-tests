@@ -4,7 +4,6 @@ ext {
 }
 
 dependencies {
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
-
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation libs.apache_http_client
+    implementation libs.apache_http_fluent_hc
 }

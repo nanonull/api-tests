@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(':api-client')
+    implementation libs.rest_assured
+}
