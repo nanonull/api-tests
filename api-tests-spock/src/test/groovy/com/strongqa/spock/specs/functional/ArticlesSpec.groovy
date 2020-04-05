@@ -3,7 +3,7 @@ package com.strongqa.spock.specs.functional
 import com.strongqa.api.client.ApiLibrary
 
 import com.strongqa.api.client.models.article.Article
-import com.strongqa.api.client.models.article.ArticleCreateRequest
+import com.strongqa.api.client.models.article.CreateArticleRequest
 import com.strongqa.spock.BaseSpecification
 import spock.lang.Shared
 import spock.lang.Stepwise
@@ -19,7 +19,7 @@ class ArticlesSpec extends BaseSpecification {
   def "create article"() {
     given:
     def categories = api.getCategories()
-    def request = new ArticleCreateRequest()
+    def request = new CreateArticleRequest()
     request.title = "Article-${System.currentTimeMillis()}"
     request.text = "description-${System.nanoTime()}"
     request.categoryId = categories.first().id

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.strongqa.api.client.models.article.Article;
-import com.strongqa.api.client.models.article.ArticleCreateRequest;
+import com.strongqa.api.client.models.article.CreateArticleRequest;
 import com.strongqa.api.client.models.category.Category;
 import java.io.IOException;
 import java.util.List;
@@ -38,14 +38,14 @@ public class ApiLibrary {
         }.getType());
   }
 
-  public Request buildPostArticle(ArticleCreateRequest request) throws IOException {
+  public Request buildPostArticle(CreateArticleRequest request) throws IOException {
     return Request.Post(BASE_URL + "/api/v1/articles")
         .addHeader("Content-Type", "application/json")
         .addHeader(API_AUTH_HEADER)
         .body(new StringEntity(GSON.toJson(request)));
   }
 
-  public Article postArticle(ArticleCreateRequest request) throws IOException {
+  public Article postArticle(CreateArticleRequest request) throws IOException {
     HttpResponse response = buildPostArticle(request).execute().returnResponse();
     return GSON.fromJson(EntityUtils.toString(response.getEntity()), Article.class);
   }

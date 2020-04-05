@@ -1,7 +1,7 @@
 package com.strongqa.spock.specs.rest
 
 import com.strongqa.api.client.ApiLibrary
-import com.strongqa.api.client.models.article.ArticleCreateRequest
+import com.strongqa.api.client.models.article.CreateArticleRequest
 import com.strongqa.spock.BaseSpecification
 import spock.lang.Shared
 import spock.lang.Unroll
@@ -11,20 +11,20 @@ class ArticlesSpec extends BaseSpecification {
   @Shared
   def api = new ApiLibrary()
   @Shared
-  static ArticleCreateRequest articleExists
+  static CreateArticleRequest articleExists
   @Shared
-  static ArticleCreateRequest articleWithShortTitle
+  static CreateArticleRequest articleWithShortTitle
 
   def setupSpec() {
     def categories = api.getCategories()
     def articles = api.getArticles()
 
-    articleExists = new ArticleCreateRequest()
+    articleExists = new CreateArticleRequest()
     articleExists.title = articles[0].title
     articleExists.text = ""
     articleExists.categoryId = categories.first().id
 
-    articleWithShortTitle = new ArticleCreateRequest()
+    articleWithShortTitle = new CreateArticleRequest()
     articleWithShortTitle.title = "abcd"
     articleWithShortTitle.text = ""
     articleWithShortTitle.categoryId = categories.first().id
@@ -33,7 +33,7 @@ class ArticlesSpec extends BaseSpecification {
   @Unroll
   def "POST article with non-success response"() {
     when:
-    def response = api.buildPostArticle(articleRequest as ArticleCreateRequest)
+    def response = api.buildPostArticle(articleRequest as CreateArticleRequest)
             .execute().returnResponse()
 
     then:

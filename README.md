@@ -6,11 +6,20 @@ Open root dir as Gradle project.
 
 ## IntelliJ IDEA preferences
 
-1 . Go to Preferences > Build tools > Gradle and set:
+### Build & run tests
+
+Preferences > Build tools > Gradle:
 
     Build and run using: IntelliJ IDEA
     Run tests using: IntelliJ IDEA
         
+### Code style
+
+Preferences > Editor > Code style:
+
+    Java indents: 2-2-4
+    Scala indents: 2-2-4
+    
 ## Environment variables
 
     BASE_URL=https://demoapp.strongqa.com

@@ -12,8 +12,8 @@ subprojects {
     }
 
     ext {
-        apacheVersion = '4.5.11'
         javaVersion = 11
+        apacheVersion = '4.5.11'
         libs = [
             "apache_http_client" : "org.apache.httpcomponents:httpclient:$apacheVersion",
             "apache_http_fluent_hc" : "org.apache.httpcomponents:fluent-hc:$apacheVersion",

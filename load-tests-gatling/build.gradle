@@ -1,20 +1,37 @@
-apply plugin: "scala"
+plugins {
+  id "scala"
+  id "com.github.lkishalmi.gatling" version "3.2.1"
+}
 
 ext {
-    scalaVersion = "2.12.10"
-    gatlingVersion = "3.2.1"
+  scalaVersion = "2.12.10"
+  gatlingVersion = "3.2.1"
+}
+
+sourceSets {
+  gatling {
+    scala.srcDirs = ["src/gatling/simulations", "src/main/scala"]
+  }
+  main.scala.srcDirs = []
+  main.java.srcDirs = []
+  test.scala.srcDirs = []
+  test.java.srcDirs = []
+}
+
+
+gatling {
+  simulations = {
+    def simulationPatterns = System.getenv("INCLUDE_SIMULATION_PATTERNS")
+    assert simulationPatterns
+    include simulationPatterns.split(",")
+  }
 }
 
 dependencies {
-    compile "org.scala-lang:scala-library:${scalaVersion}"
-    compile "org.scala-lang:scala-compiler:${scalaVersion}"
+  compile "org.scala-lang:scala-library:${scalaVersion}"
+  compile "org.scala-lang:scala-compiler:${scalaVersion}"
 
-    testCompile "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
-    compile group: 'io.gatling', name: 'gatling-core', version: gatlingVersion
-    compile group: 'io.gatling', name: 'gatling-http', version: gatlingVersion
-    compile group: 'io.gatling', name: 'gatling-jdbc', version: gatlingVersion
-    compile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
-    compile group: 'io.gatling', name: 'gatling-recorder', version: gatlingVersion
-
-    implementation project(':api-client')
+  compile project(':api-client')
+  gatlingCompile project(':api-client')
+  gatlingRuntime project(':api-client')
 }

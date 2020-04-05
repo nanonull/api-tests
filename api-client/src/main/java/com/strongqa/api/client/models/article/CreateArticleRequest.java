@@ -4,7 +4,7 @@ package com.strongqa.api.client.models.article;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ArticleCreateRequest {
+public class CreateArticleRequest {
 
     @SerializedName("title")
     @Expose
